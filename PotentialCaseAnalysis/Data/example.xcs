@@ -1,0 +1,54 @@
+// TopSolid Version = v6.18.200
+// TopSolid Document = ÿ6A94ÿ68482.top
+// Exported Part = ÿ6A94ÿ68482
+// User = strixB
+// Date = 2020/10/25-09:53:29.63
+
+SetMachiningParameters("AB",1,0,1114122,false);
+
+// Part definition
+CreateFinishedWorkpieceBox("ÿ6A94ÿ68482",300.000,200.000,18.000);
+CreateRawWorkpiece("ÿ6A94ÿ68482",0.000,0.000,0.000,0.000,0.000,0.000);
+
+// Drilling operation
+SelectWorkplane("Left");
+CreateDrill("",17.500,10.500,8.000,3.000,"",TypeOfProcess.Drilling,"-1","-1",0,-1,-1,"P",0,0);
+
+// Drilling operation
+CreateDrill("",37.500,5.000,12.000,3.000,"",TypeOfProcess.Drilling,"-1","-1",0,-1,-1,"P",0,0);
+
+// Drilling operation
+SelectWorkplane("Top");
+CreateDrill("",55.000,157.500,3.000,3.000,"",TypeOfProcess.Drilling,"-1","-1",0,-1,-1,"P",0,0);
+
+// Drilling operation
+CreateDrill("",102.500,122.500,8.000,3.000,"",TypeOfProcess.Drilling,"-1","-1",0,-1,-1,"P",0,0);
+
+// Drilling operation
+SelectWorkplane("Bottom");
+CreateDrill("",12.500,182.500,3.000,3.000,"",TypeOfProcess.Drilling,"-1","-1",0,-1,-1,"P",0,0);
+
+// Drilling operation
+SelectWorkplane("Top");
+CreateDrill("",127.500,12.500,18.000,3.000,"",TypeOfProcess.Drilling,"-1","-1",0,-1,-1,"P",0,0);
+
+// Pocket operation
+SelectWorkplane("Bottom");
+CreatePolyline("geom_0",32.500,92.500);
+AddSegmentToPolyline(77.500,92.500,"");
+AddSegmentToPolyline(77.500,177.500,"");
+AddSegmentToPolyline(32.500,177.500,"");
+AddSegmentToPolyline(32.500,92.500,"");
+ClosePolyline("geom_0");
+CreateContourPocket("",12.000,"",TypeOfProcess.GeneralRouting,"E005","-1",-1,-1,-1,50,false);
+
+// Pocket operation
+SelectWorkplane("Top");
+CreatePolyline("geom_1",202.500,130.000);
+AddSegmentToPolyline(265.000,130.000,"");
+AddSegmentToPolyline(265.000,90.000,"");
+AddSegmentToPolyline(202.500,90.000,"");
+AddSegmentToPolyline(202.500,130.000,"");
+ClosePolyline("geom_1");
+CreateContourPocket("",12.000,"",TypeOfProcess.GeneralRouting,"E005","-1",-1,-1,-1,50,false);
+
