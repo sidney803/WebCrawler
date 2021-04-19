@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassCrawler.Downloader\ClassCrawler.Downloader.csproj" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
   </ItemGroup>
 
 </Project>
