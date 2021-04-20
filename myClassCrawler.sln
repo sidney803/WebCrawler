@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassCrawler.Request", "Cla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassCrawler.Downloader", "ClassCrawler.Downloader\ClassCrawler.Downloader.csproj", "{7B6EEB98-790C-4873-BC59-D58031F04E8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassCrawler.Processor", "ClassCrawler.Processor\ClassCrawler.Processor.csproj", "{7C0828B1-B393-49F2-BABA-3250EED88AE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7B6EEB98-790C-4873-BC59-D58031F04E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B6EEB98-790C-4873-BC59-D58031F04E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B6EEB98-790C-4873-BC59-D58031F04E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C0828B1-B393-49F2-BABA-3250EED88AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C0828B1-B393-49F2-BABA-3250EED88AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C0828B1-B393-49F2-BABA-3250EED88AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C0828B1-B393-49F2-BABA-3250EED88AE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

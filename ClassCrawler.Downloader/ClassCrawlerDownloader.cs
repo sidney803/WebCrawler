@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -59,8 +60,16 @@ namespace ClassCrawler.Downloader
                 return Enumerable.Empty<string>();
             }
         }
-
-
+        public async Task<HtmlDocument> DownloadHtmlDoc(string url)
+        {
+            var htmlDocument = new HtmlDocument();
+            using (WebClient client = new WebClient())
+            {
+                string htmlCode = await client.DownloadStringTaskAsync(url);
+                htmlDocument.LoadHtml(htmlCode);
+            }
+            return htmlDocument;
+        }
 
 
     }
