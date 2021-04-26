@@ -1,12 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassCrawler.Data\ClassCrawler.Data.csproj" />
   </ItemGroup>
 
 </Project>

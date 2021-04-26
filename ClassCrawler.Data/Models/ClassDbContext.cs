@@ -18,7 +18,7 @@ namespace ClassCrawler.Data.Models
         {
             if(!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=ClassDb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=ClassDB;Trusted_Connection=True;");
             }
         }
         

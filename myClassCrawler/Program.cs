@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using ClassCrawler.Downloader;
+using ClassCrawler.Processor;
 
 namespace myClassCrawler
 {
@@ -20,12 +21,14 @@ namespace myClassCrawler
             //取得網頁有課程資料的links
             var myClassCrawlerDownloader = new ClassCrawlerDownloader(Url, Regex);
             var UrlLinks = await myClassCrawlerDownloader.GetLinks();
-
+            var processor = new ClassCrawlerProcessor();
 
             //讀取每個網頁的欄位資料: 課名, 價格, 圖片等
             foreach(var url in UrlLinks)
             {
                 var document = await myClassCrawlerDownloader.DownloadHtmlDoc(url);
+                var entity = processor.Process(document, Url);   //開課時段晚點處理
+                
             }
 
             Console.WriteLine(UrlLinks);

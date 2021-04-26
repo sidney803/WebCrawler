@@ -6,6 +6,9 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.PhantomJS;
+using System.IO;
 
 namespace ClassCrawler.Downloader
 {
@@ -63,10 +66,16 @@ namespace ClassCrawler.Downloader
         public async Task<HtmlDocument> DownloadHtmlDoc(string url)
         {
             var htmlDocument = new HtmlDocument();
-            using (WebClient client = new WebClient())
+            //using (WebClient client = new WebClient())
+            using(IWebDriver driver = new PhantomJSDriver())
             {
+                /*  //只能下載靜態html網頁; JS轉譯的content擷取不到
                 string htmlCode = await client.DownloadStringTaskAsync(url);
                 htmlDocument.LoadHtml(htmlCode);
+                */
+                //使用PhantomJSDriver來存取JS轉譯後之content
+                driver.Navigate().GoToUrl(url);
+                htmlDocument.LoadHtml(driver.PageSource);
             }
             return htmlDocument;
         }
