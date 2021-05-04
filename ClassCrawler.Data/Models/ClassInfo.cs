@@ -11,7 +11,7 @@ namespace ClassCrawler.Data.Models
     {
         [Key]
         [ClassCrawlerFieldAttributes(XpathExpression = "課程代號", SelectorType = SelectorType.FixedValue)]
-        public int ClassId { get; set; }
+        public string ClassId { get; set; }
 
         [ClassCrawlerFieldAttributes(XpathExpression = "//*[@id='leftArea']/p/b/a")]
         public string ClassName { get; set; }
@@ -32,6 +32,6 @@ namespace ClassCrawler.Data.Models
         public string ClassTime { get; set; }
         //[ClassCrawlerFieldAttributes(XpathExpression = "//*[@id='leftArea']/p/text()[7]")]
         [ClassCrawlerFieldAttributes(XpathExpression = "//*[@id='leftArea']/p/span[@class='label label-danger']", SelectorType = SelectorType.XPath)]
-        public decimal ClassPrice { get; set; }
+        public string ClassPrice { get; set; }
     }
 }

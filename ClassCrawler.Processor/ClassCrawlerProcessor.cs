@@ -13,20 +13,20 @@ namespace ClassCrawler.Processor
 {
     public class ClassCrawlerProcessor
     {
-        public Dictionary<string, object> Process(HtmlDocument document, string rootUrl)
+        public ClassInfo Process(HtmlDocument document, string rootUrl)
         {
             var entityExpression = (typeof(ClassInfo)).GetCustomAttribute<ClassCrawlerEntityAttribute>().XPath;
             var entityNode = document.DocumentNode.SelectSingleNode(entityExpression);
 
             var nameHtmlValueDictionary = new Dictionary<string, object>();
             var attributeDictionary = GetColumnNameValuePairsFromHtml(document);
-            
+
             foreach (var expression in attributeDictionary)
             {
                 var columnName = expression.Key;
                 object columnValue = "";
                 var fieldExpression = expression.Value.Item2;
-                
+
                 switch (expression.Value.Item1)
                 {
                     case SelectorType.XPath:
@@ -34,11 +34,17 @@ namespace ClassCrawler.Processor
                         if (nodeHtml != null)
                             if (fieldExpression.Contains("img"))
                             {  //表示圖檔link
-                                columnValue = rootUrl+nodeHtml.Attributes[0].Value;
+                                columnValue = rootUrl + nodeHtml.Attributes[0].Value;
                             }
                             else
                             {
-                                columnValue = nodeHtml.InnerText;
+
+                                if (decimal.TryParse(nodeHtml.InnerText, out var result))
+                                    columnValue = result;
+                                else
+                                {
+                                    columnValue = nodeHtml.InnerText;
+                                }
                             }
                         break;
                     case SelectorType.FixedValue:
@@ -48,10 +54,10 @@ namespace ClassCrawler.Processor
                         //string nodeHtmlAsString = nodeHtml.InnerText.Trim();
                         do
                         {
-                            if (nodeHtml!=null && nodeHtml.InnerText.Trim().Contains(fieldExpression))
+                            if (nodeHtml != null && nodeHtml.InnerText.Trim().Contains(fieldExpression))
                             {
                                 columnValue = nodeHtml.InnerText
-                                                .Substring(nodeHtml.InnerText.IndexOf("：")+1, nodeHtml.InnerText.Length-(nodeHtml.InnerText.IndexOf("：")+1));
+                                                .Substring(nodeHtml.InnerText.IndexOf("：") + 1, nodeHtml.InnerText.Length - (nodeHtml.InnerText.IndexOf("：") + 1));
                                 if (fieldExpression == "開課時段" || fieldExpression == "學費")
                                 {
                                     columnValue = columnValue.ToString().Replace("\"", "");
@@ -69,10 +75,18 @@ namespace ClassCrawler.Processor
                         break;
                 }
                 nameHtmlValueDictionary.Add(columnName, columnValue);
-            }   
+            }
 
-            return nameHtmlValueDictionary;
+            ClassInfo processorEntity = (ClassInfo)Activator.CreateInstance(typeof(ClassInfo));
 
+            foreach (var pair in nameHtmlValueDictionary)
+            {
+                var prop = processorEntity.GetType().GetProperty(pair.Key, BindingFlags.Public | BindingFlags.Instance);
+                if (prop != null && prop.CanWrite)
+                    prop.SetValue(processorEntity, pair.Value, null);
+            }
+            //return nameHtmlValueDictionary;
+            return processorEntity;
         }
 
         private Dictionary<string, Tuple<SelectorType, string>> GetColumnNameValuePairsFromHtml(HtmlDocument document)

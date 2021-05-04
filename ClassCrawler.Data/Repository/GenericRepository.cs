@@ -8,16 +8,18 @@ namespace ClassCrawler.Data.Repository
 {
     public class GenericRepository 
     {
-        private readonly ClassDbContext _dbContext;
+        private readonly ClassMariaDbContext _dbContext;
 
         public GenericRepository()
         {
-            _dbContext = new ClassDbContext();
+            //_dbContext = new ClassDbContext();
+            _dbContext = new ClassMariaDbContext();
         }
 
         public async Task CreateAsync(ClassInfo entity)
         {
-            await _dbContext.Set<ClassInfo>().AddAsync(entity);
+            //await _dbContext.Set<IEnumerable<ClassInfo>>().AddAsync(entity);
+            await _dbContext.ClassInfo.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
 

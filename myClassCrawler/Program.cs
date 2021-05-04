@@ -17,7 +17,7 @@ namespace myClassCrawler
         {
             string Url = "https://eec.usc.edu.tw/";  //實踐大學推廣教育部
             string Regex = @"/Front/Classdetail.+";
-            bool DownloadFromMemory = true;  //false: downlad from disk
+            //bool DownloadFromMemory = true;  //false: downlad from disk
 
             //取得網頁有課程資料的links
             var myClassCrawlerDownloader = new ClassCrawlerDownloader(Url, Regex);
@@ -29,7 +29,7 @@ namespace myClassCrawler
             {
                 var document = await myClassCrawlerDownloader.DownloadHtmlDoc(url);
                 var entity = processor.Process(document, Url);   //開課時段晚點處理
-                //var _repository = await new GenericRepository().CreateAsync(entity);
+                await new GenericRepository().CreateAsync(entity);
             }
 
             Console.WriteLine(UrlLinks);

@@ -2,14 +2,16 @@
 using ClassCrawler.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClassCrawler.Data.Migrations.ClassMariaDb
 {
     [DbContext(typeof(ClassMariaDbContext))]
-    partial class ClassMariaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210504093412_modifyClassId2String")]
+    partial class modifyClassId2String
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,8 +32,8 @@ namespace ClassCrawler.Data.Migrations.ClassMariaDb
                     b.Property<string>("ClassName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("ClassPrice")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<decimal>("ClassPrice")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("ClassStatus")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

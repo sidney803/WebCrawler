@@ -2,14 +2,16 @@
 using ClassCrawler.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClassCrawler.Data.Migrations.ClassMariaDb
 {
     [DbContext(typeof(ClassMariaDbContext))]
-    partial class ClassMariaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210504095413_changePriceType2String")]
+    partial class changePriceType2String
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
