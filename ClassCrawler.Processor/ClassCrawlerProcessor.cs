@@ -106,5 +106,23 @@ namespace ClassCrawler.Processor
             }
             return attributeDictionary;
         }
+
+        private Dictionary<string, Tuple<SelectorType, string>> GetColumnNameValuePairs(HtmlDocument document)
+        {
+            var attributeDictionary = new Dictionary<string, Tuple<SelectorType, string>>();
+
+            PropertyInfo[] props = typeof(ClassInfo).GetProperties();
+            var propList = props.Where(p => p.CustomAttributes.Count() > 0);
+
+            foreach (PropertyInfo prop in propList)
+            {
+                var attr = prop.GetCustomAttribute<ClassCrawlerFieldAttributes>();
+                if (attr != null)
+                {
+                    attributeDictionary.Add(prop.Name, Tuple.Create(attr.SelectorType, attr.XpathExpression));
+                }
+            }
+            return attributeDictionary;
+        }
     }
 }
