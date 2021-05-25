@@ -12,7 +12,8 @@ namespace ClassCrawler.Data.Models
         }
         public ClassDbContext(DbContextOptions<ClassDbContext> options) : base(options)
         { }
-        public virtual DbSet<ClassInfo> ClassInfo { get; set; }  
+        public virtual DbSet<ClassInfo> ClassInfo { get; set; } 
+        public virtual DbSet<University> University { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
