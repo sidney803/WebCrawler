@@ -10,6 +10,7 @@ namespace ClassCrawler.Data.Models
     public class ClassInfo
     {
         [Key]
+        [StringLength(100)]
         [ClassCrawlerFieldAttributes(XpathExpression = "課程代號", SelectorType = SelectorType.FixedValue)]
         public string ClassId { get; set; }
 

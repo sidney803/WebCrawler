@@ -2,16 +2,14 @@
 using ClassCrawler.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ClassCrawler.Data.Migrations.ClassMariaDb
+namespace ClassCrawler.Data.Migrations
 {
     [DbContext(typeof(ClassMariaDbContext))]
-    [Migration("20210504093412_modifyClassId2String")]
-    partial class modifyClassId2String
+    partial class ClassMariaDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +19,8 @@ namespace ClassCrawler.Data.Migrations.ClassMariaDb
             modelBuilder.Entity("ClassCrawler.Data.Models.ClassInfo", b =>
                 {
                     b.Property<string>("ClassId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
 
                     b.Property<string>("ClassDate")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -32,8 +31,8 @@ namespace ClassCrawler.Data.Migrations.ClassMariaDb
                     b.Property<string>("ClassName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<decimal>("ClassPrice")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<string>("ClassPrice")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("ClassStatus")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -44,6 +43,29 @@ namespace ClassCrawler.Data.Migrations.ClassMariaDb
                     b.HasKey("ClassId");
 
                     b.ToTable("ClassInfo");
+                });
+
+            modelBuilder.Entity("ClassCrawler.Data.Models.University", b =>
+                {
+                    b.Property<uint>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int unsigned");
+
+                    b.Property<string>("ClassName")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("ShortName")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("University");
                 });
 #pragma warning restore 612, 618
         }

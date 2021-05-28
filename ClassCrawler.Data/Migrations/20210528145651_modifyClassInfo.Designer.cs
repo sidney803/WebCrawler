@@ -2,14 +2,16 @@
 using ClassCrawler.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ClassCrawler.Data.Migrations.ClassMariaDb
+namespace ClassCrawler.Data.Migrations
 {
     [DbContext(typeof(ClassMariaDbContext))]
-    partial class ClassMariaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210528145651_modifyClassInfo")]
+    partial class modifyClassInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,8 @@ namespace ClassCrawler.Data.Migrations.ClassMariaDb
             modelBuilder.Entity("ClassCrawler.Data.Models.ClassInfo", b =>
                 {
                     b.Property<string>("ClassId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
 
                     b.Property<string>("ClassDate")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

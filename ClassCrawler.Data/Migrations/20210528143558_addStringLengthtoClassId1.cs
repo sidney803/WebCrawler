@@ -1,12 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ClassCrawler.Data.Migrations.ClassMariaDb
+namespace ClassCrawler.Data.Migrations
 {
-    public partial class createUniversityClass : Migration
+    public partial class addStringLengthtoClassId1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<string>(
+                name: "ClassId",
+                table: "ClassInfo",
+                type: "varchar",
+                nullable: false,
+                //collation: "utf8mb4",
+                oldClrType: typeof(string),
+                oldType: "varchar(100)",
+                oldMaxLength: 100,
+                oldNullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .OldAnnotation("MySql:CharSet", "utf8mb4")
+                .OldAnnotation("Relational:Collation", "utf8mb4_bin");
+                
             migrationBuilder.CreateTable(
                 name: "University",
                 columns: table => new
@@ -25,6 +39,9 @@ namespace ClassCrawler.Data.Migrations.ClassMariaDb
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ClassInfo");
+
             migrationBuilder.DropTable(
                 name: "University");
         }

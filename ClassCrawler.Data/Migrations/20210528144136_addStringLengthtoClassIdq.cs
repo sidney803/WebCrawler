@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ClassCrawler.Data.Migrations.ClassMariaDb
+namespace ClassCrawler.Data.Migrations
 {
-    public partial class initialMaria : Migration
+    public partial class addStringLengthtoClassIdq : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
