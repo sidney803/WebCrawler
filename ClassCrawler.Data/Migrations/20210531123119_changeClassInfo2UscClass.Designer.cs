@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassCrawler.Data.Migrations
 {
     [DbContext(typeof(ClassMariaDbContext))]
-    [Migration("20210528144136_addStringLengthtoClassIdq")]
-    partial class addStringLengthtoClassIdq
+    [Migration("20210531123119_changeClassInfo2UscClass")]
+    partial class changeClassInfo2UscClass
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,30 @@ namespace ClassCrawler.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("ClassCrawler.Data.Models.ClassInfo", b =>
+            modelBuilder.Entity("ClassCrawler.Data.Models.University", b =>
+                {
+                    b.Property<uint>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int unsigned");
+
+                    b.Property<string>("ClassName")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("ShortName")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("University");
+                });
+
+            modelBuilder.Entity("ClassCrawler.Data.Models.UscClass", b =>
                 {
                     b.Property<string>("ClassId")
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
@@ -44,30 +67,7 @@ namespace ClassCrawler.Data.Migrations
 
                     b.HasKey("ClassId");
 
-                    b.ToTable("ClassInfo");
-                });
-
-            modelBuilder.Entity("ClassCrawler.Data.Models.University", b =>
-                {
-                    b.Property<uint>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
-
-                    b.Property<string>("ClassName")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("ShortName")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("University");
+                    b.ToTable("UscClass");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,9 +13,9 @@ namespace ClassCrawler.Processor
 {
     public class ClassCrawlerProcessor
     {
-        public ClassInfo Process(HtmlDocument document, string rootUrl)
+        public UscClass Process(HtmlDocument document, string rootUrl)
         {
-            var entityExpression = (typeof(ClassInfo)).GetCustomAttribute<ClassCrawlerEntityAttribute>().XPath;
+            var entityExpression = (typeof(UscClass)).GetCustomAttribute<ClassCrawlerEntityAttribute>().XPath;
             var entityNode = document.DocumentNode.SelectSingleNode(entityExpression);
 
             var nameHtmlValueDictionary = new Dictionary<string, object>();
@@ -77,7 +77,7 @@ namespace ClassCrawler.Processor
                 nameHtmlValueDictionary.Add(columnName, columnValue);
             }
 
-            ClassInfo processorEntity = (ClassInfo)Activator.CreateInstance(typeof(ClassInfo));
+            UscClass processorEntity = (UscClass)Activator.CreateInstance(typeof(UscClass));
 
             foreach (var pair in nameHtmlValueDictionary)
             {
@@ -93,7 +93,7 @@ namespace ClassCrawler.Processor
         {
             var attributeDictionary = new Dictionary<string, Tuple<SelectorType, string>>();
 
-            PropertyInfo[] props = typeof(ClassInfo).GetProperties();
+            PropertyInfo[] props = typeof(UscClass).GetProperties();
             var propList = props.Where(p => p.CustomAttributes.Count() > 0);
 
             foreach(PropertyInfo prop in propList)
@@ -111,7 +111,7 @@ namespace ClassCrawler.Processor
         {
             var attributeDictionary = new Dictionary<string, Tuple<SelectorType, string>>();
 
-            PropertyInfo[] props = typeof(ClassInfo).GetProperties();
+            PropertyInfo[] props = typeof(UscClass).GetProperties();
             var propList = props.Where(p => p.CustomAttributes.Count() > 0);
 
             foreach (PropertyInfo prop in propList)

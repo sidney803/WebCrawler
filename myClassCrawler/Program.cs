@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using ClassCrawler.Downloader;
 using ClassCrawler.Processor;
 using ClassCrawler.Data.Repository;
+using ClassCrawler.Data.Models;
 
 namespace myClassCrawler
 {
@@ -29,7 +30,7 @@ namespace myClassCrawler
             {
                 var document = await myClassCrawlerDownloader.DownloadHtmlDoc(url);
                 var entity = processor.Process(document, Url);   //開課時段晚點處理
-                await new GenericRepository().CreateAsync(entity);
+                await new GenericRepository<UscClass>().CreateAsync(entity);
             }
 
             Console.WriteLine(UrlLinks);

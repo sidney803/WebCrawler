@@ -7,7 +7,7 @@ using ClassCrawler.Data.Attributes;
 namespace ClassCrawler.Data.Models
 {
     [ClassCrawlerEntityAttribute(XPath = "//*[@id='leftArea']")]
-    public class ClassInfo
+    public class UscClass
     {
         [Key]
         [StringLength(100)]

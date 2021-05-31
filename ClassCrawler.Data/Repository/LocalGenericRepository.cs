@@ -16,7 +16,7 @@ namespace ClassCrawler.Data.Repository
             _dbContext = new ClassDbContext();
         }
 
-        public async Task CreateAsync(ClassInfo entity)
+        public async Task CreateAsync(UscClass entity)
         {
             //await _dbContext.Set<IEnumerable<ClassInfo>>().AddAsync(entity);
             await _dbContext.ClassInfo.AddAsync(entity);

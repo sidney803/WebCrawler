@@ -19,7 +19,7 @@ namespace ClassCrawler.Data.Models
         {
         }
 
-        public virtual DbSet<ClassInfo> ClassInfo { get; set; }
+        public virtual DbSet<UscClass> UscClass { get; set; }
         public virtual DbSet<University> University { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

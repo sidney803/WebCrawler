@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ClassCrawler.Data.Repository
 {
-    public class GenericRepository 
+    public class GenericRepository<TEntity> where TEntity: class 
     {
         private readonly ClassMariaDbContext _dbContext;
 
@@ -18,27 +18,27 @@ namespace ClassCrawler.Data.Repository
             _dbContext = new ClassMariaDbContext();
         }
 
-        public IQueryable<ClassInfo> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
-            var entity = _dbContext.Set<ClassInfo>().AsNoTracking();
+            var entity = _dbContext.Set<TEntity>().AsNoTracking();
             return entity;
         }
 
-        public async Task CreateAsync(ClassInfo entity)
+        public async Task CreateAsync(TEntity entity)
         {
             //await _dbContext.Set<IEnumerable<ClassInfo>>().AddAsync(entity);
-            await _dbContext.ClassInfo.AddAsync(entity);
+            await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
-
-        public async Task UpdateAsync(ClassInfo entity)
+        /*
+        public async Task UpdateAsync(UscClass entity)
         {
             var allClass = GetAll();
             var targetClassList = await (from c in allClass
                                          where c.ClassId == entity.ClassId
                                          select c.ClassId).ToListAsync();
             var targetClassEntity = _dbContext.ClassInfo.FindAsync(targetClassList);
-        }
+        }*/
 
     }
 }
