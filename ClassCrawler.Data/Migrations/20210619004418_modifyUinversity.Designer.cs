@@ -2,14 +2,16 @@
 using ClassCrawler.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClassCrawler.Data.Migrations
 {
     [DbContext(typeof(ClassMariaDbContext))]
-    partial class ClassMariaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210619004418_modifyUinversity")]
+    partial class modifyUinversity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,8 +33,7 @@ namespace ClassCrawler.Data.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("RootUrl")
-                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
-                        .HasMaxLength(100);
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("ShortName")
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")

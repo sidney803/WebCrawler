@@ -9,4 +9,8 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ClassCrawler.Data\ClassCrawler.Data.csproj" />
+  </ItemGroup>
+
 </Project>

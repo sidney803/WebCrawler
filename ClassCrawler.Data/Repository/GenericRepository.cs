@@ -14,8 +14,8 @@ namespace ClassCrawler.Data.Repository
 
         public GenericRepository()
         {
-            //_dbContext = new ClassDbContext();
-            _dbContext = new ClassMariaDbContext();
+            //_dbContext = new ClassDbContext();    //儲存至vs localDB
+            _dbContext = new ClassMariaDbContext();  //儲存至MariaDB
         }
 
         public IQueryable<TEntity> GetAll()
@@ -30,15 +30,19 @@ namespace ClassCrawler.Data.Repository
             await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
-        /*
-        public async Task UpdateAsync(UscClass entity)
+        
+        public async Task UpdateAsync(TEntity entity)
         {
-            var allClass = GetAll();
-            var targetClassList = await (from c in allClass
-                                         where c.ClassId == entity.ClassId
-                                         select c.ClassId).ToListAsync();
-            var targetClassEntity = _dbContext.ClassInfo.FindAsync(targetClassList);
-        }*/
+            try
+            {
+                _dbContext.Set<TEntity>().Remove(entity);
+                await _dbContext.SaveChangesAsync();   
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
 
     }
 }

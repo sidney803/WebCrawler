@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ClassCrawler.Downloader\ClassCrawler.Downloader.csproj" />
     <ProjectReference Include="..\ClassCrawler.Processor\ClassCrawler.Processor.csproj" />
+    <ProjectReference Include="..\ClassCrawler.Request\ClassCrawler.Request.csproj" />
   </ItemGroup>
 
 </Project>

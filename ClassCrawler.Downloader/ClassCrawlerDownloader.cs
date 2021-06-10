@@ -15,12 +15,15 @@ namespace ClassCrawler.Downloader
     public class ClassCrawlerDownloader
     {
         private string _url;
+        private string _university;
         private readonly  Regex _regex;
-        public ClassCrawlerDownloader(string url, string regex)
+        public ClassCrawlerDownloader(string url, string regex, string university)
         {
             _url = url;
             if (!string.IsNullOrWhiteSpace(regex))
                 _regex = new Regex(regex);
+
+            _university = university;
         }
 
         public async Task<IEnumerable<string>> GetLinks(int level = 0)
@@ -58,7 +61,7 @@ namespace ClassCrawler.Downloader
 
                 return linkList;
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
                 return Enumerable.Empty<string>();
             }
@@ -67,15 +70,18 @@ namespace ClassCrawler.Downloader
         {
             var htmlDocument = new HtmlDocument();
             //using (WebClient client = new WebClient())
-            using(IWebDriver driver = new PhantomJSDriver())
+            if (_university == "usc")  //實踐大學
             {
-                /*  //只能下載靜態html網頁; JS轉譯的content擷取不到
-                string htmlCode = await client.DownloadStringTaskAsync(url);
-                htmlDocument.LoadHtml(htmlCode);
-                */
-                //使用PhantomJSDriver來存取JS轉譯後之content
-                driver.Navigate().GoToUrl(url);
-                htmlDocument.LoadHtml(driver.PageSource);
+                using (IWebDriver driver = new PhantomJSDriver())
+                {
+                    /*  //只能下載靜態html網頁; JS轉譯的content擷取不到
+                    string htmlCode = await client.DownloadStringTaskAsync(url);
+                    htmlDocument.LoadHtml(htmlCode);
+                    */
+                    //使用PhantomJSDriver來存取JS轉譯後之content
+                    driver.Navigate().GoToUrl(url);
+                    htmlDocument.LoadHtml(driver.PageSource);
+                }
             }
             return htmlDocument;
         }

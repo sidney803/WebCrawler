@@ -13,7 +13,10 @@ namespace ClassCrawler.Processor
 {
     public class ClassCrawlerProcessor
     {
-        public UscClass Process(HtmlDocument document, string rootUrl)
+        //private readonly string  _university;
+
+
+        public dynamic Process(HtmlDocument document, string rootUrl)
         {
             var entityExpression = (typeof(UscClass)).GetCustomAttribute<ClassCrawlerEntityAttribute>().XPath;
             var entityNode = document.DocumentNode.SelectSingleNode(entityExpression);

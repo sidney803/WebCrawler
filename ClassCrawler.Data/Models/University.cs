@@ -14,5 +14,7 @@ namespace ClassCrawler.Data.Models
         public string ShortName { get; set; }
         [StringLength(50)]
         public string ClassName { get; set; }
+        [StringLength(100)]
+        public string RootUrl { get; set; }
     }
 }
