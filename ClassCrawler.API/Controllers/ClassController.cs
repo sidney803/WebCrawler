@@ -40,5 +40,14 @@ namespace ClassCrawler.API.Controllers
             else
                 return BadRequest();
         }
+        [Route("QueryClass")]
+        public IActionResult QueryClass(string keyword)
+        {
+            //keyword會視為一個字串來查詢
+            GenericRepository<UscClass> uscDbContext = new GenericRepository<UscClass>();
+            var result = uscDbContext.GetAll()
+                    .Where(x => x.ClassName.Contains(keyword)).ToList();
+            return Ok(result);
+        }
     }
 }

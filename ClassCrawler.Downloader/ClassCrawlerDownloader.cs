@@ -58,7 +58,7 @@ namespace ClassCrawler.Downloader
 
                 return linkList;
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
                 return Enumerable.Empty<string>();
             }
